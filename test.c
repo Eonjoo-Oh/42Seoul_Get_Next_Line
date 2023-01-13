@@ -9,10 +9,12 @@ int main(void) {
     fd = open("./test.txt", O_RDONLY);
     str = get_next_line(fd);
     printf("1 : %s", str);
+    system("leaks a.out");
     str = get_next_line(fd);
     printf("2 : %s", str);
+    //system("leaks a.out");
     str = get_next_line(fd);
     printf("3 : %s", str);
-    system("leaks a.out");
+    //system("leaks a.out");
     return (0);
 }

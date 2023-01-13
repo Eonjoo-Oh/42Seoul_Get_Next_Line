@@ -6,7 +6,7 @@
 /*   By: eoh <eoh@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 16:26:40 by eonjoo            #+#    #+#             */
-/*   Updated: 2023/01/13 14:25:24 by eoh              ###   ########.fr       */
+/*   Updated: 2023/01/13 18:40:53 by eoh              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ char *ft_strdup(const char *src)
         str[i] = c_src[i];
         i++;
     }
-    str[i] = 0;
+    str[i] = '\0';
     return (str);
 }
 
@@ -104,6 +104,8 @@ int ft_strchr(char *s, int c)
 	int i;
 
 	i = 0;
+	if (s == NULL)
+		return (-1);
 	while (s[i])
 	{
 		if (s[i] == c)

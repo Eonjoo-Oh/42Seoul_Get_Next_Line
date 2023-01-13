@@ -6,12 +6,11 @@
 /*   By: eoh <eoh@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 16:11:54 by eonjoo            #+#    #+#             */
-/*   Updated: 2023/01/13 17:39:04 by eoh              ###   ########.fr       */
+/*   Updated: 2023/01/13 18:55:54 by eoh              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-#include "stdio.h"
 
 char *get_next_line(int fd)
 {
@@ -24,19 +23,19 @@ char *get_next_line(int fd)
     if (save == 0)
     {
         save = ft_strdup("");
-        if (!save)
-            return (0);
+        if (save == NULL)
+            return (NULL);
     }
     buf = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
     if (buf == 0)
     {
         free(save);
-        return (0);
+        return (NULL);
     }
     save = read_line(fd, buf, save); // 한 줄을 찾아서 save에 넣어주는 작업
     free(buf);
-    /*if (save == 0)
-        return (0);*/
+    if (save == 0)
+        return (NULL);
     result = get_result(save); // save에서 개행또는 eof까지 잘라서 res를 만들어주는 작업
     save = update_save(save);  // save에서 res를 잘라내고 save를 갱신하는 작업
     return (result);
@@ -59,7 +58,7 @@ char *read_line(int fd, char *buf, char *save)
             return (save);
         buf[read_res] = '\0';
         old_save = save;
-        save = ft_strjoin(save, buf); // save와 buf를 합쳐주는 함수
+        save = ft_strjoin(save, buf); // save와 buf를 합쳐주는 함수 //join안에서 free
         free(old_save);
         if (save[0] == '\0')
         {
@@ -78,12 +77,13 @@ char *get_result(char *save)
     int n_index;
     char *result;
 
+   if (save[0] == '\0')
+        return (0);
     n_index = ft_strchr(save, '\n');
     if (n_index == -1)
     {
-        result = save;
-        save = 0;
-        free(save);
+        result = ft_strdup(save);
+        //save = 0;
     }
     else
         result = ft_substr(save, 0, n_index); // ft_substr(char, start, end) start부터 end까지 잘라주고 종료문자를 보장해주는 함수
@@ -95,17 +95,23 @@ char *update_save(char *save)
     char *new_save;
     int n_index;
     
-    if (save == 0)
+    if (save[0] == '\0')
+    {
+        free(save);
         return (0);
+    }
     n_index = ft_strchr(save, '\n');
     if (n_index == -1)
     {
         free(save);
-        save = NULL;
+        //save = NULL;
         new_save = 0;
     }
     else
+    {
         new_save = ft_substr(save, n_index + 1, ft_strlen(save) - 1);
+        free(save);
+    }
     return (new_save);
 }  
 //0x7fc0e2104080

@@ -14,5 +14,6 @@ int main(void) {
         free(str);
         str = get_next_line(fd);
     }
+    system("leaks a.out");
     return (0);
 }
