@@ -6,7 +6,7 @@
 /*   By: eoh <eoh@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 16:11:54 by eonjoo            #+#    #+#             */
-/*   Updated: 2023/01/13 17:17:26 by eoh              ###   ########.fr       */
+/*   Updated: 2023/01/13 17:39:04 by eoh              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,8 @@ char *read_line(int fd, char *buf, char *save)
         free(old_save);
         if (save[0] == '\0')
         {
-            save = 0;
             free(save);
+            save = NULL;
             return (save);
         }
         if (ft_strchr(save, '\n') != -1 || read_res < BUFFER_SIZE) // ft_strchr 해당문자가 있는지 찾아주는 함수
@@ -82,8 +82,8 @@ char *get_result(char *save)
     if (n_index == -1)
     {
         result = save;
+        save = 0;
         free(save);
-        //save = 0;
     }
     else
         result = ft_substr(save, 0, n_index); // ft_substr(char, start, end) start부터 end까지 잘라주고 종료문자를 보장해주는 함수
@@ -94,12 +94,14 @@ char *update_save(char *save)
 {
     char *new_save;
     int n_index;
-
+    
+    if (save == 0)
+        return (0);
     n_index = ft_strchr(save, '\n');
     if (n_index == -1)
     {
-        save = 0;
         free(save);
+        save = NULL;
         new_save = 0;
     }
     else
