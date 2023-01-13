@@ -6,11 +6,12 @@
 /*   By: eoh <eoh@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 16:11:54 by eonjoo            #+#    #+#             */
-/*   Updated: 2023/01/13 18:55:54 by eoh              ###   ########.fr       */
+/*   Updated: 2023/01/13 19:22:25 by eoh              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+#include "stdio.h"
 
 char *get_next_line(int fd)
 {
@@ -23,8 +24,8 @@ char *get_next_line(int fd)
     if (save == 0)
     {
         save = ft_strdup("");
-        if (save == NULL)
-            return (NULL);
+        /*if (save == NULL)
+            return (NULL);*/
     }
     buf = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
     if (buf == 0)
@@ -34,14 +35,14 @@ char *get_next_line(int fd)
     }
     save = read_line(fd, buf, save); // 한 줄을 찾아서 save에 넣어주는 작업
     free(buf);
-    if (save == 0)
+    if (save == NULL)
         return (NULL);
     result = get_result(save); // save에서 개행또는 eof까지 잘라서 res를 만들어주는 작업
     save = update_save(save);  // save에서 res를 잘라내고 save를 갱신하는 작업
     return (result);
 }
 
-char *read_line(int fd, char *buf, char *save)
+char i*read_line(nt fd, char *buf, char *save)
 {
     char *old_save;
     int read_res;
