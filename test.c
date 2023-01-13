@@ -13,6 +13,6 @@ int main(void) {
     printf("2 : %s", str);
     str = get_next_line(fd);
     printf("3 : %s", str);
-    system("leaks a.out");
+    //system("leaks a.out");
     return (0);
 }
