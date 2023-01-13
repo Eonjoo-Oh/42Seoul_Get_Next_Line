@@ -6,11 +6,12 @@
 /*   By: eoh <eoh@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 16:11:54 by eonjoo            #+#    #+#             */
-/*   Updated: 2023/01/13 16:40:17 by eoh              ###   ########.fr       */
+/*   Updated: 2023/01/13 17:17:26 by eoh              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+#include "stdio.h"
 
 char *get_next_line(int fd)
 {
@@ -62,8 +63,8 @@ char *read_line(int fd, char *buf, char *save)
         free(old_save);
         if (save[0] == '\0')
         {
+            save = 0;
             free(save);
-            save = NULL;
             return (save);
         }
         if (ft_strchr(save, '\n') != -1 || read_res < BUFFER_SIZE) // ft_strchr 해당문자가 있는지 찾아주는 함수
@@ -97,11 +98,12 @@ char *update_save(char *save)
     n_index = ft_strchr(save, '\n');
     if (n_index == -1)
     {
+        save = 0;
         free(save);
-        save = NULL;
         new_save = 0;
     }
     else
         new_save = ft_substr(save, n_index + 1, ft_strlen(save) - 1);
     return (new_save);
-}
+}  
+//0x7fc0e2104080
