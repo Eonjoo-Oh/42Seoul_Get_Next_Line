@@ -6,7 +6,7 @@
 /*   By: eoh <eoh@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 16:26:40 by eonjoo            #+#    #+#             */
-/*   Updated: 2023/01/13 19:18:18 by eoh              ###   ########.fr       */
+/*   Updated: 2023/01/16 10:15:31 by eoh              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,33 +24,33 @@ int	ft_strlen(char *s)
 	return (i);
 }
 
-char *ft_strdup(const char *src)
+char	*ft_strdup(const char *src)
 {
-    char *str;
-    char *c_src;
-    int l;
-    int i;
+	char	*str;
+	char	*c_src;
+	int		l;
+	int		i;
 
-    l = 0;
-    i = 0;
-    c_src = (char *)src;
-    while (c_src[l])
-    {
-        l++;
-    }
-    str = (char *)malloc(sizeof(char) * (l + 1));
-    if (str == 0)
-        return (0);
-    while (i < l)
-    {
-        str[i] = c_src[i];
-        i++;
-    }
-    str[i] = '\0';
-    return (str);
+	l = 0;
+	i = 0;
+	c_src = (char *)src;
+	while (c_src[l])
+	{
+		l++;
+	}
+	str = (char *)malloc(sizeof(char) * (l + 1));
+	if (str == 0)
+		return (0);
+	while (i < l)
+	{
+		str[i] = c_src[i];
+		i++;
+	}
+	str[i] = '\0';
+	return (str);
 }
 
-char *ft_strjoin(char *s1, char *s2)
+char	*ft_strjoin(char *s1, char *s2)
 {
 	size_t	s1_len;
 	size_t	s2_len;
@@ -79,9 +79,9 @@ char *ft_strjoin(char *s1, char *s2)
 
 char	*ft_substr(char *s, int start, int end)
 {
-	int	s_len;
+	int		s_len;
 	char	*result;
-	int	i;
+	int		i;
 
 	i = 0;
 	s_len = ft_strlen(s);
@@ -99,9 +99,9 @@ char	*ft_substr(char *s, int start, int end)
 	return (result);
 }
 
-int ft_strchr(char *s, int c)
+int	ft_strchr(char *s, int c)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (s == NULL)
