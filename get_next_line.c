@@ -6,7 +6,7 @@
 /*   By: eoh <eoh@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 16:11:54 by eonjoo            #+#    #+#             */
-/*   Updated: 2023/01/13 19:22:25 by eoh              ###   ########.fr       */
+/*   Updated: 2023/01/16 10:02:44 by eoh              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ char *get_next_line(int fd)
     return (result);
 }
 
-char i*read_line(nt fd, char *buf, char *save)
+char *read_line(int fd, char *buf, char *save)
 {
     char *old_save;
     int read_res;
