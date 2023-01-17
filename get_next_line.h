@@ -6,7 +6,7 @@
 /*   By: eoh <eoh@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 14:18:43 by eoh               #+#    #+#             */
-/*   Updated: 2023/01/16 10:26:44 by eoh              ###   ########.fr       */
+/*   Updated: 2023/01/17 12:51:58 by eoh              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ char	*get_next_line(int fd);
 char	*read_line(int fd, char *buf, char *save);
 char	*get_result(char *save);
 char	*update_save(char *save);
-char	*ft_strdup(const char *src);
+char	*ft_strdup(char *src);
 char	*ft_strjoin(char *s1, char *s2);
 char	*ft_substr(char *s, int start, int end);
 int		ft_strchr(char *s, int c);

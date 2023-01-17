@@ -6,7 +6,7 @@
 /*   By: eoh <eoh@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 16:26:40 by eoh               #+#    #+#             */
-/*   Updated: 2023/01/16 10:29:48 by eoh              ###   ########.fr       */
+/*   Updated: 2023/01/17 12:48:15 by eoh              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	ft_strlen(char *s)
 	return (i);
 }
 
-char	*ft_strdup(const char *src)
+char	*ft_strdup(char *src)
 {
 	char	*str;
 	char	*c_src;
@@ -33,7 +33,7 @@ char	*ft_strdup(const char *src)
 
 	l = 0;
 	i = 0;
-	c_src = (char *)src;
+	c_src = src;
 	while (c_src[l])
 	{
 		l++;

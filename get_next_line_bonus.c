@@ -6,7 +6,7 @@
 /*   By: eoh <eoh@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 10:35:01 by eoh               #+#    #+#             */
-/*   Updated: 2023/01/16 17:10:35 by eoh              ###   ########.fr       */
+/*   Updated: 2023/01/17 11:41:21 by eoh              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,32 +14,35 @@
 
 char *get_next_line(int fd)
 {
-	static t_list *save;
+	static t_list *save_lst;
 	t_list *lst;
 	char *buf;
-	char *saved_line;
+	char *save;
+	char *result;
 
 	buf = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
 	if (buf == 0)
 		return (NULL);
-	if (!save)
+	if (!save_lst)
 	{
-		save = lstnew(fd, buf);
-		if (save == 0)
+		save_lst = lstnew(fd);
+		if (save_lst == 0)
 		{
 			free(buf);
 			return (NULL);
 		}
 	}
-	lst = recall(fd, save);
-	saved_line = lst->content;
-	saved_line = read_line(fd, buf, saved_line);
+	lst = recall(fd, save_lst);
+	save = read_line(fd, buf, save_lst->content);
 	free(buf);
-	if (saved_line == NULL)
+	if (save == NULL)
+	{
+		free(save_lst);
 		return (NULL);
-	result = get_result(saved_line);
-	line = update_save(save_line);
-	save = lstrenew(t_list *save, int fd, char *line);
+	}
+	result = get_result(save);
+	save_lst->content = update_save(save);
+	
 	return (result);
 }
 
@@ -51,17 +54,13 @@ t_list *recall(int fd, t_list *save)
 	{
 		if (save->next == NULL)
 		{
-			new = (t_list*)malloc(sizeof(t_list));
-			if (!(save->next))
-				return (0);
-			save->next = new;
-			new->fd = fd;
-			new->content = strdup("");
+			new = lstnew(fd);
 			if (new->content == NULL)
 			{
 				free(new);
 				return (0);
 			}
+			save->next = new;
 			return (new);
 		}
 		save = save->next;
@@ -69,7 +68,7 @@ t_list *recall(int fd, t_list *save)
 	return (save);
 }
 
-char *read_line(int fd, char *content)
+char *read_line(int fd, char *buf, char *save)
 {
 	char	*old_save;
 	int		read_res;
@@ -98,7 +97,7 @@ char *read_line(int fd, char *content)
 	}
 }
 
-char *get_result(char *line)
+char *get_result(char *save)
 {
 	int		n_index;
 	char	*result;
@@ -113,7 +112,7 @@ char *get_result(char *line)
 	return (result);
 }
 
-char *update_save(char *line)
+char *update_save(char *save)
 {
 	char	*new_save;
 	int		n_index;
@@ -137,10 +136,14 @@ char *update_save(char *line)
 	return (new_save);
 }
 
-t_list *lstnew(int fd, char *content)
+t_list *lstnew(int fd)
 {
 	t_list *new;
+	char *content;
 
+	content = ft_strdup("");
+	if (content == NULL)
+		return (NULL);
 	new = (t_list *)malloc(sizeof(t_list));
 	if (new == 0)
 		return (0);
@@ -149,10 +152,4 @@ t_list *lstnew(int fd, char *content)
 	new->next = NULL;
 
 	return (new);
-}
-
-void	lstrenew(int fd, char *content)
-{
-	lstrenew->fd = fd;
-	lstrenew->contetn = content;
 }
