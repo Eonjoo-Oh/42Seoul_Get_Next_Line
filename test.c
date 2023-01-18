@@ -15,6 +15,8 @@ int main(void) {
     //system("leaks a.out");
     str = get_next_line(fd);
     printf("3 : %s", str);
-    system("leaks a.out");
+    // system("leaks a.out");
+    str = get_next_line(fd);
+    printf("3 : %s", str);
     return (0);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eoh <eoh@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: eonjoo <eonjoo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 16:26:40 by eoh               #+#    #+#             */
-/*   Updated: 2023/01/17 12:48:15 by eoh              ###   ########.fr       */
+/*   Updated: 2023/01/18 13:27:25 by eonjoo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,12 +79,10 @@ char	*ft_strjoin(char *s1, char *s2)
 
 char	*ft_substr(char *s, int start, int end)
 {
-	int		s_len;
 	char	*result;
 	int		i;
 
 	i = 0;
-	s_len = ft_strlen(s);
 	if (s == 0)
 		return (0);
 	result = (char *)malloc(sizeof(char) * (end - start + 2));
