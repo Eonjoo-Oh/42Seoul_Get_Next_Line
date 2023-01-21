@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils_bonus.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eonjoo <eonjoo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: eoh <eoh@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/16 10:35:15 by eoh               #+#    #+#             */
-/*   Updated: 2023/01/18 13:24:19 by eonjoo           ###   ########.fr       */
+/*   Created: 2023/01/21 14:39:54 by eoh               #+#    #+#             */
+/*   Updated: 2023/01/21 17:47:12 by eoh              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,37 +17,13 @@ int	ft_strlen(char *s)
 	int	i;
 
 	i = 0;
+	if (s == 0)
+		return (0);
 	while (s[i])
 	{
 		i++;
 	}
 	return (i);
-}
-
-char	*ft_strdup(const char *src)
-{
-	char	*str;
-	char	*c_src;
-	int		l;
-	int		i;
-
-	l = 0;
-	i = 0;
-	c_src = (char *)src;
-	while (c_src[l])
-	{
-		l++;
-	}
-	str = (char *)malloc(sizeof(char) * (l + 1));
-	if (str == 0)
-		return (0);
-	while (i < l)
-	{
-		str[i] = c_src[i];
-		i++;
-	}
-	str[i] = '\0';
-	return (str);
 }
 
 char	*ft_strjoin(char *s1, char *s2)
@@ -62,7 +38,7 @@ char	*ft_strjoin(char *s1, char *s2)
 	s2_len = ft_strlen(s2);
 	result = (char *)malloc(sizeof(char) * (s1_len + s2_len) + 1);
 	if (!result)
-		return (0);
+		return (NULL);
 	while (i < s1_len)
 	{
 		result[i] = s1[i];
@@ -83,13 +59,15 @@ char	*ft_substr(char *s, int start, int end)
 	char	*result;
 	int		i;
 
+	if (end == -1)
+		end = ft_strlen(s);
 	i = 0;
 	s_len = ft_strlen(s);
 	if (s == 0)
 		return (0);
 	result = (char *)malloc(sizeof(char) * (end - start + 2));
 	if (!result)
-		return (0);
+		return (NULL);
 	while (i < end - start + 1)
 	{
 		result[i] = s[start + i];
