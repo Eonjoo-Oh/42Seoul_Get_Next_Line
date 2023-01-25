@@ -6,7 +6,7 @@
 /*   By: eoh <eoh@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 16:11:54 by eoh               #+#    #+#             */
-/*   Updated: 2023/01/17 12:55:25 by eoh              ###   ########.fr       */
+/*   Updated: 2023/01/25 11:46:06 by eoh              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,14 @@ char	*get_next_line(int fd)
 		return (0);
 	if (save == 0)
 		save = ft_strdup("");
+	if (save == NULL)
+		return (0);
 	buf = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
 	if (buf == 0)
 	{
-		free(save);
+		if (save != NULL)
+			free(save);
+		save = NULL;
 		return (NULL);
 	}
 	save = read_line(fd, buf, save);
@@ -33,7 +37,7 @@ char	*get_next_line(int fd)
 	if (save == NULL)
 		return (NULL);
 	result = get_result(save);
-	save = update_save(save);
+	save = update_save(save, result);
 	return (result);
 }
 
@@ -56,11 +60,10 @@ char	*read_line(int fd, char *buf, char *save)
 		old_save = save;
 		save = ft_strjoin(save, buf);
 		free(old_save);
+		if (save == NULL)
+			return (0);
 		if (save[0] == '\0')
-		{
-			free(save);
-			return (save);
-		}
+			return (free_save(save));
 		if (ft_strchr(save, '\n') != -1 || read_res < BUFFER_SIZE)
 			return (save);
 	}
@@ -81,11 +84,16 @@ char	*get_result(char *save)
 	return (result);
 }
 
-char	*update_save(char *save)
+char	*update_save(char *save, char *result)
 {
 	char	*new_save;
 	int		n_index;
 
+	if (result == NULL)
+	{
+		free(save);
+		return (0);
+	}
 	if (save[0] == '\0')
 	{
 		free(save);
@@ -103,4 +111,10 @@ char	*update_save(char *save)
 		free(save);
 	}
 	return (new_save);
+}
+
+char	*free_save(char *save)
+{
+	free(save);
+	return (0);
 }

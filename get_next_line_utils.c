@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eonjoo <eonjoo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: eoh <eoh@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 16:26:40 by eoh               #+#    #+#             */
-/*   Updated: 2023/01/18 13:27:25 by eonjoo           ###   ########.fr       */
+/*   Updated: 2023/01/25 11:36:13 by eoh              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,9 @@ char	*ft_substr(char *s, int start, int end)
 		return (0);
 	result = (char *)malloc(sizeof(char) * (end - start + 2));
 	if (!result)
+	{
 		return (0);
+	}
 	while (i < end - start + 1)
 	{
 		result[i] = s[start + i];
